@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class GradeStatistics {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        double total = 0;
+        double max = 0;       // ❌ wrong initialization
+        double min = 100;     // ❌ wrong initialization
+
+        for (int i = 0; i < 10; i++)
+            System.out.print("Enter grade: ");
+
+            if (!sc.hasNextDouble())   // ❌ checks but does not FIX invalid input
+                System.out.println("Invalid!!");
+            double grade = sc.nextDouble();  // still tries to read it
+
+            if (grade > max) max = grade;
+            if (grade < min) min = grade;
+
+            total = total + grade;
+        }
+
+        double average = total / 10;
+        System.out.println("Average: " + average);
+        System.out.println("Max: " + max);
+        System.out.println("Min: " + min);
+    }
+}
