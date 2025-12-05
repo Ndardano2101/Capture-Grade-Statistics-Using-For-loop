@@ -1,33 +1,45 @@
 import java.util.Scanner;
 
 public class GradeStatistics {
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         double total = 0;
-        double max = -99999;        // ❌ arbitrary bad value
-        double min = 99999;         // ❌ arbitrary bad value
+        double max = Double.NEGATIVE_INFINITY;
+        double min = Double.POSITIVE_INFINITY;
 
-        for (int i = 0; i <= 10; i++) {   // ❌ runs 11 times
-            double grade = 0;  // ❌ unnecessary reinitialization
+        System.out.println("Enter 10 grades:");
 
-            System.out.print("Enter a grade: ");
+        for (int i = 0; i < 10; i++) {
+            System.out.print("Enter grade #" + (i + 1) + ": ");
 
-            if (!sc.hasNextDouble())
-                System.out.println("Not a number!");  // ❌ but still continues with grade=0
-            else
-                grade = sc.nextDouble();
+            // Input validation to prevent infinite loop if the user enters non-numbers
+            while (!sc.hasNextDouble()) {
+                System.out.print("Invalid input! Please enter a numeric grade: ");
+                sc.next();  // clear invalid input
+            }
 
-            if (grade > max) max = grade;
-            if (grade < min) min = grade;
+            double grade = sc.nextDouble();
 
             total += grade;
+
+            if (grade > max) {
+                max = grade;
+            }
+
+            if (grade < min) {
+                min = grade;
+            }
         }
 
-        double average = total / 11;   // ❌ also wrong due to incorrect loop count
+        double average = total / 10;
 
-        System.out.println("Avg: " + average);
-        System.out.println("Max: " + max);
-        System.out.println("Min: " + min);
+        System.out.println("\n----- Grade Statistics -----");
+        System.out.println("Average: " + average);
+        System.out.println("Maximum: " + max);
+        System.out.println("Minimum: " + min);
+
+        sc.close();
     }
 }
