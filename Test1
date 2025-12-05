@@ -5,24 +5,28 @@ public class GradeStatistics {
         Scanner sc = new Scanner(System.in);
 
         double total = 0;
-        double max = 0;       // ❌ wrong initialization
-        double min = 100;     // ❌ wrong initialization
+        double max = -99999;        // ❌ arbitrary bad value
+        double min = 99999;         // ❌ arbitrary bad value
 
-        for (int i = 0; i < 10; i++)
-            System.out.print("Enter grade: ");
+        for (int i = 0; i <= 10; i++) {   // ❌ runs 11 times
+            double grade = 0;  // ❌ unnecessary reinitialization
 
-            if (!sc.hasNextDouble())   // ❌ checks but does not FIX invalid input
-                System.out.println("Invalid!!");
-            double grade = sc.nextDouble();  // still tries to read it
+            System.out.print("Enter a grade: ");
+
+            if (!sc.hasNextDouble())
+                System.out.println("Not a number!");  // ❌ but still continues with grade=0
+            else
+                grade = sc.nextDouble();
 
             if (grade > max) max = grade;
             if (grade < min) min = grade;
 
-            total = total + grade;
+            total += grade;
         }
 
-        double average = total / 10;
-        System.out.println("Average: " + average);
+        double average = total / 11;   // ❌ also wrong due to incorrect loop count
+
+        System.out.println("Avg: " + average);
         System.out.println("Max: " + max);
         System.out.println("Min: " + min);
     }
