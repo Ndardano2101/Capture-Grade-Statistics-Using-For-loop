@@ -1,3 +1,8 @@
+/*
+ Nick Dardano
+ 12/4/25
+Grade statistics capture using for loops
+ */
 import java.util.Scanner;
 
 public class GradeStatistics {
